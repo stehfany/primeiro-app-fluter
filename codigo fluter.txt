@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Home(),
+  ));
+}
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var _frases = [
+    "Quando acordei hoje de manhã, eu sabia quem eu era,\n mas acho que já mudei muitas vezes desde então.\n Alice no Pais das maravilhas,Lewis Carroll ",
+    "Palavras são, na minha não tão humilde opinião, nossa\n inesgotável fonte de magia.Capazes de ferir e\n de curar. \n Harry Potter e as Reliquias da Morte, J.K Rowling",
+    "Quando os pés estão corretos,todo o resto nos acompanha.\n As Crônicas de Narnia:O leão,a feiticeira e o guarda-roupa, C. S. Lewis",
+    "Meus sentimentos não podem ser reprimidos\n preciso que me permita dizer-lhe que eu a admiro\n e amo ardentemente.\n Orgulho e Preconceito, Jane Austen",
+    "Você quer um coração?Você não sabe o quão sortudo\n és por não ter um. Corações nunca serão práticos\n enquanto não forem feitos para não se partirem \n O Mágico de Oz, L. Frank Baum",
+    "Dizem por aí, mas não tenho certeza,que meu sorriso\n fica mais feliz quando te vejo, dizem também que\n meus olhos brilham,dizem também que é amor, mas\n isso sim é certeza.\n Dom Casmurro, Machado de Assis",
+    "Esse é o problema da dor. Ela precisa ser sentida. \n A Culpa é das Estrelas, John Green",
+    "Tudo o que temos de decidir é o que fazer com o\n tempo que nos é dado.\n Senhor dos Anéis, A Sociedade do anel, J.R.R Tolkien ",
+  ];
+
+  var _fraseGerada = "Clique abaixo para gerar uma frase";
+
+  var android;
+
+  void _gerarFrase() {
+    var numeroSorteado = Random().nextInt(_frases.length);
+    setState(() {
+      _fraseGerada = _frases[numeroSorteado];
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            "Frases de livros",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      ),
+      backgroundColor: Colors.grey,
+      body: Container(
+        padding: EdgeInsets.all(16),
+        width: double.infinity,
+        // decoration: BoxDecoration(
+        //   border: Border.all(width: 3, color: Colors.amber)
+        // ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.network('https://th.bing.com/th/id/OIP.KvFVzdgCSA77GXdckPSfzgHaE8?pid=ImgDet&rs=1'),
+            Text(
+              _fraseGerada,
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic, color: Colors.black),
+            ),
+            ElevatedButton(
+              onPressed: _gerarFrase,
+              child: Text("Gerar nova frase"),
+              style: ElevatedButton.styleFrom(primary: Colors.lightGreen),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
